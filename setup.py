@@ -10,7 +10,7 @@ with open("README.md", "r", encoding="utf-8") as f_in:
 
 setup(
     name="delimited-protobuf",
-    version="0.0.4",
+    version="0.0.5",
     author="soulmachine",
     description="A read/write library for length-delimited protobuf message",
     long_description=long_description,

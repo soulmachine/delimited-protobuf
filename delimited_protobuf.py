@@ -1,4 +1,4 @@
-"""Save multiple Protobuf messages to a file"""
+"""A read/write library for length-delimited protobuf messages"""
 
 from __future__ import absolute_import
 
@@ -17,7 +17,7 @@ def _read_varint(stream: BinaryIO, offset: int = 0) -> int:
         stream.seek(offset)
     buf: bytes = stream.read(1)
     if buf == b'':
-        return 0
+        return 0  # reached EOF
     while (buf[-1] & 0x80) >> 7 == 1:  # while the MSB is 1
         new_byte = stream.read(1)
         if new_byte == b'':
@@ -29,12 +29,11 @@ def _read_varint(stream: BinaryIO, offset: int = 0) -> int:
 
 def read(stream: BinaryIO, proto_class_name: Type[T]) -> Optional[T]:
     """
-    Read a single size-delimited message from the given stream.
+    Read a single length-delimited message from the given stream.
 
     Similar to:
       * parseDelimitedFrom() in https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/Parser.java
       * ParseDelimitedFromZeroCopyStream() in https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/util/delimited_message_util.h
-    @returns new offset.
     """
     size = _read_varint(stream)
     if size == 0:
@@ -47,7 +46,7 @@ def read(stream: BinaryIO, proto_class_name: Type[T]) -> Optional[T]:
 
 def write(stream: BinaryIO, msg: T):
     """
-    Write a single size-delimited message to the given stream.
+    Write a single length-delimited message to the given stream.
 
     Similar to:
       * writeDelimitedTo() in https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/MessageLite.java
