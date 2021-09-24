@@ -10,7 +10,7 @@ with open("README.md", "r", encoding="utf-8") as f_in:
 
 setup(
     name="delimited-protobuf",
-    version="0.0.3",
+    version="0.0.4",
     author="soulmachine",
     description="A read/write library for length-delimited protobuf message",
     long_description=long_description,
@@ -19,6 +19,7 @@ setup(
     py_modules=["delimited_protobuf"],
     install_requires=['protobuf'],
     license='Apache License 2.0',
+    license_files=('LICENSE',),
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
         'Topic :: Software Development :: Libraries :: Python Modules',
