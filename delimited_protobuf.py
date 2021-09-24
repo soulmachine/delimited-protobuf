@@ -32,8 +32,8 @@ def read(stream: BinaryIO, proto_class_name: Type[T]) -> Optional[T]:
     Read a single length-delimited message from the given stream.
 
     Similar to:
-      * parseDelimitedFrom() in https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/Parser.java
-      * ParseDelimitedFromZeroCopyStream() in https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/util/delimited_message_util.h
+      * [`CodedInputStream`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/io/coded_stream.h#L66)
+      * [`parseDelimitedFrom()`](https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/Parser.java)
     """
     size = _read_varint(stream)
     if size == 0:
@@ -49,8 +49,8 @@ def write(stream: BinaryIO, msg: T):
     Write a single length-delimited message to the given stream.
 
     Similar to:
-      * writeDelimitedTo() in https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/MessageLite.java
-      * SerializeDelimitedToZeroCopyStream() in https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/util/delimited_message_util.h
+      * [`CodedOutputStream`](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/io/coded_stream.h#L47)
+      * [`MessageLite#writeDelimitedTo`](https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/MessageLite.java#L126)
     """
     assert stream is not None
     _EncodeVarint(stream.write, msg.ByteSize())
