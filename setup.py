@@ -9,10 +9,10 @@ with open("README.md", "r", encoding="utf-8") as f_in:
     long_description = f_in.read()
 
 setup(
-    name="delimited_protobuf",
-    version="0.0.2",
+    name="delimited-protobuf",
+    version="0.0.3",
     author="soulmachine",
-    description="Save multiple Protobuf messages to a file",
+    description="A read/write library for length-delimited protobuf message",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/soulmachine/delimited-protobuf",
